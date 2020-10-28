@@ -12,7 +12,7 @@ import (
 )
 
 func odooRestart(c *gin.Context) {
-	cmd := exec.Command("systemctl", "restart", "biznavi")
+	cmd := exec.Command("sudo", "systemctl", "restart", "biznavi")
 	out, err := cmd.CombinedOutput()
 	if err != nil {
 		log.Fatalf("cmd.Run() failed with %s\n", err)
