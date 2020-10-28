@@ -34,5 +34,5 @@ func main() {
 
 	r.GET("/odoo/restart", odooRestart)
 
-	r.Run()
+	r.Run(":8888")
 }
