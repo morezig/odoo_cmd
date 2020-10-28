@@ -19,7 +19,18 @@ func odooRestart(c *gin.Context) {
 		c.String(http.StatusOK, fmt.Sprintf("error: %s", err))
 	}
 	fmt.Printf("combined out:\n%s\n", string(out))
-	c.String(http.StatusOK, string(out))
+	c.String(http.StatusOK, "Completed")
+}
+
+func gitPull(c *gin.Context) {
+	cmd := exec.Command("git", "-C", "/opt/biznavi", "pull")
+	out, err := cmd.CombinedOutput()
+	if err != nil {
+		log.Fatalf("cmd.Run() failed with %s\n", err)
+		c.String(http.StatusOK, fmt.Sprintf("error: %s", err))
+	}
+	fmt.Printf("combined out:\n%s\n", string(out))
+	c.String(http.StatusOK, "Completed")
 }
 
 func index(c *gin.Context) {
@@ -47,6 +58,7 @@ func main() {
 
 	r.GET("/", index)
 	r.GET("/odoo/restart", odooRestart)
+	r.GET("/odoo/gitpull", gitPull)
 
 	r.Run()
 }
