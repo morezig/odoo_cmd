@@ -23,16 +23,15 @@ func odooRestart(c *gin.Context) {
 }
 
 func main() {
-	r := gin.Default()
-
 	gin.DisableConsoleColor()
-	gin.SetMode(gin.ReleaseMode)
 
 	// Logging to a file.
 	f, _ := os.Create("log/odoo_cmd.log")
 	gin.DefaultWriter = io.MultiWriter(f)
 
+	r := gin.Default()
+
 	r.GET("/odoo/restart", odooRestart)
 
-	r.Run(":8888")
+	r.Run()
 }
