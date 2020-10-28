@@ -19,7 +19,11 @@ func odooRestart(c *gin.Context) {
 		c.String(http.StatusOK, fmt.Sprintf("error: %s", err))
 	}
 	fmt.Printf("combined out:\n%s\n", string(out))
-	c.String(http.StatusOK, "Completed")
+	c.Writer.WriteHeader(200)
+	idx, _ := bindata.Asset("assets/done.html")
+	c.Writer.Write(idx)
+	c.Writer.Header().Add("Accept", "text/html")
+	c.Writer.Flush()
 }
 
 func gitPull(c *gin.Context) {
@@ -30,7 +34,11 @@ func gitPull(c *gin.Context) {
 		c.String(http.StatusOK, fmt.Sprintf("error: %s", err))
 	}
 	fmt.Printf("combined out:\n%s\n", string(out))
-	c.String(http.StatusOK, "Completed")
+	c.Writer.WriteHeader(200)
+	idx, _ := bindata.Asset("assets/done.html")
+	c.Writer.Write(idx)
+	c.Writer.Header().Add("Accept", "text/html")
+	c.Writer.Flush()
 }
 
 func index(c *gin.Context) {
