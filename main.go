@@ -2,8 +2,10 @@ package main
 
 import (
 	"fmt"
+	"io"
 	"log"
 	"net/http"
+	"os"
 	"os/exec"
 
 	"github.com/gin-gonic/gin"
@@ -21,11 +23,11 @@ func odooRestart(c *gin.Context) {
 }
 
 func main() {
-	// gin.DisableConsoleColor()
-
-	// // Logging to a file.
-	// f, _ := os.Create("log/odoo_cmd.log")
-	// gin.DefaultWriter = io.MultiWriter(f)
+	gin.DisableConsoleColor()
+	gin.SetMode(gin.ReleaseMode)
+	// Logging to a file.
+	f, _ := os.Create("log/odoo_cmd.log")
+	gin.DefaultWriter = io.MultiWriter(f)
 
 	r := gin.Default()
 
