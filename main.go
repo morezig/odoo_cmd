@@ -9,6 +9,8 @@ import (
 
 	assetfs "github.com/elazarl/go-bindata-assetfs"
 	"github.com/gin-gonic/gin"
+
+	"github.com/coreos/go-systemd/daemon"
 )
 
 func odooRestart(c *gin.Context) {
@@ -67,6 +69,8 @@ func main() {
 	r.GET("/", index)
 	r.GET("/odoo/restart", odooRestart)
 	r.GET("/odoo/gitpull", gitPull)
+
+	daemon.SdNotify(false, "REEADY=1")
 
 	r.Run()
 }
