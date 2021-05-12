@@ -14,7 +14,7 @@ import (
 )
 
 func escpRestart(c *gin.Context) {
-	cmd := exec.Command("sudo", "systemctl", "restart", "escp")
+	cmd := exec.Command("sudo", "systemctl", "restart", "mz_escp")
 	out, err := cmd.CombinedOutput()
 	if err != nil {
 		log.Fatalf("cmd.Run() failed with %s\n", err)
