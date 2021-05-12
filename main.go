@@ -58,6 +58,29 @@ func gitPull(c *gin.Context) {
 	c.Writer.Flush()
 }
 
+func odoo(c *gin.Context) {
+	pwd := c.PostForm("pwd")
+	srv_act := c.PostForm("srv_act")
+	// print("pwd:", pwd)
+	// print("srv_act:", srv_act)
+	if pwd == "sf17BY23" {
+		switch srv_act {
+		case "escp":
+			escpRestart(c)
+		case "odoo":
+			odooRestart(c)
+		case "git":
+			gitPull(c)
+		default: //default:當前面條件都沒有滿足時將會執行此處內包含的方法
+			fmt.Println("no action")
+			c.String(200, "No Action........")
+		}
+	} else {
+		c.String(200, "XXXXX密碼錯誤XXXXX")
+	}
+
+}
+
 func index(c *gin.Context) {
 	c.Writer.WriteHeader(200)
 	idx, _ := bindata.Asset("assets/index.html")
@@ -82,9 +105,10 @@ func main() {
 	r.StaticFS("/js", &fs)
 
 	r.GET("/", index)
-	r.GET("/odoo/restart", odooRestart)
-	r.GET("/odoo/gitpull", gitPull)
-	r.GET("/odoo/escp", escpRestart)
+	r.POST("/odoo/action", odoo)
+	// r.GET("/odoo/restart", odooRestart)
+	// r.GET("/odoo/gitpull", gitPull)
+	// r.GET("/odoo/escp", escpRestart)
 
 	daemon.SdNotify(false, "REEADY=1")
 

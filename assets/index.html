@@ -1,11 +1,23 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
-	<head>
 
-    </head>
-	<body>
-        <input type="button" onclick="location.href='/odoo/gitpull';" value="拉新版本程式" />
-        <input type="button" onclick="location.href='/odoo/restart';" value="重啟伺服器" />
-        <input type="button" onclick="location.href='/odoo/escp';" value="重啟印表機" />
-    </body>
+<head>
+
+</head>
+
+<body>
+    <!-- <input type="button" onclick="location.href='/odoo/gitpull';" value="拉新版本程式" /> -->
+    <!-- <input type="button" onclick="location.href='/odoo/restart';" value="重啟伺服器" />
+        <input type="button" onclick="location.href='/odoo/escp';" value="重啟印表機" /> -->
+    <form method="POST" action="/odoo/action">
+        密碼:<input type="password" name="pwd" /><br>
+        請選擇要執行的動作:<br>
+        <input type="radio" name="srv_act" value="escp">重啟印表機
+        <input type="radio" name="srv_act" value="odoo">重啟伺服器
+        <input type="radio" name="srv_act" value="git">拉新版本程式<br>
+
+        <button type="submit" name="submit">送出</button>
+    </form>
+</body>
+
 </html>
