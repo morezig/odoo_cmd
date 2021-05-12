@@ -1,14 +1,14 @@
 [Unit]
 Description=Odoo CMD
-After=network.target
+After=biznavi.service
 
 [Service]
-Type=simple
 User=biznavi
 Group=biznavi
-ExecStart=/opt/biznavi/odoo_cmd
-ExecReload=/bin/kill -s HUP $MAINPID
-ExecStop=/bin/kill -s QUIT $MAINPID
+WorkingDirectory=/opt/biznavi/odoo_cmd/
+ExecStart=/opt/biznavi/odoo_cmd/odoo_cmd
+Restart=on-failure
+RestartSec=1
 
 [Install]
 WantedBy=multi-user.target
