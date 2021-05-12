@@ -1,23 +1,44 @@
-<!DOCTYPE html>
-<html lang="zh-TW">
+<!doctype html>
+<html>
 
 <head>
-
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
 </head>
 
 <body>
-    <!-- <input type="button" onclick="location.href='/odoo/gitpull';" value="拉新版本程式" /> -->
-    <!-- <input type="button" onclick="location.href='/odoo/restart';" value="重啟伺服器" />
-        <input type="button" onclick="location.href='/odoo/escp';" value="重啟印表機" /> -->
-    <form method="POST" action="/odoo/action">
-        密碼:<input type="password" name="pwd" /><br>
-        請選擇要執行的動作:<br>
-        <input type="radio" name="srv_act" value="escp">重啟印表機
-        <input type="radio" name="srv_act" value="odoo">重啟伺服器
-        <input type="radio" name="srv_act" value="git">拉新版本程式<br>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8"
+        crossorigin="anonymous"></script>
+    <div class="container">
+        <figure class="text-center">
+            <H1>後台重啟服務</H1>
+        </figure>
 
-        <button type="submit" name="submit">送出</button>
-    </form>
+        <form method="POST" action="/odoo/action">
+            <div class="mb-3">
+                <label for="pwd" class="col-2 col-form-label">密碼</label>
+                <input type="password" class="form-control" id="pwd" name="pwd">
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="srv_act" id="inlineRadio1" value="escp">
+                <label class="form-check-label" for="inlineRadio1">重啟印表機</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="srv_act" id="inlineRadio2" value="odoo">
+                <label class="form-check-label" for="inlineRadio2">重啟伺服器</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="srv_act" id="inlineRadio3" value="git">
+                <label class="form-check-label" for="inlineRadio3">拉新版本程式</label>
+            </div>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <button type="submit" class="btn btn-primary">送出</button>
+            </div>
+        </form>
+    </div>
 </body>
 
 </html>
