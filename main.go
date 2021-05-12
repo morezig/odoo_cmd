@@ -61,8 +61,8 @@ func gitPull(c *gin.Context) {
 func odoo(c *gin.Context) {
 	pwd := c.PostForm("pwd")
 	srv_act := c.PostForm("srv_act")
-	// print("pwd:", pwd)
-	// print("srv_act:", srv_act)
+	fmt.Println("pwd:", pwd)
+	fmt.Println("srv_act:", srv_act)
 	if pwd == "sf17BY23" {
 		switch srv_act {
 		case "escp":
