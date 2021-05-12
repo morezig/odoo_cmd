@@ -13,6 +13,21 @@ import (
 	"github.com/coreos/go-systemd/daemon"
 )
 
+func escpRestart(c *gin.Context) {
+	cmd := exec.Command("sudo", "systemctl", "restart", "escp")
+	out, err := cmd.CombinedOutput()
+	if err != nil {
+		log.Fatalf("cmd.Run() failed with %s\n", err)
+		c.String(http.StatusOK, fmt.Sprintf("error: %s", err))
+	}
+	fmt.Printf("combined out:\n%s\n", string(out))
+	c.Writer.WriteHeader(200)
+	idx, _ := bindata.Asset("assets/done.html")
+	c.Writer.Write(idx)
+	c.Writer.Header().Add("Accept", "text/html")
+	c.Writer.Flush()
+}
+
 func odooRestart(c *gin.Context) {
 	cmd := exec.Command("sudo", "systemctl", "restart", "biznavi")
 	out, err := cmd.CombinedOutput()
@@ -69,6 +84,7 @@ func main() {
 	r.GET("/", index)
 	r.GET("/odoo/restart", odooRestart)
 	r.GET("/odoo/gitpull", gitPull)
+	r.GET("/odoo/escp", escpRestart)
 
 	daemon.SdNotify(false, "REEADY=1")
 
